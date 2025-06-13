@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Analysis</title>
+</head>
+<body>
+
+<h1>Financial Analysis</h1>
+
+<script>
+    function calculateGrahamValue() {
+        var earningsPerShare = parseFloat(document.getElementById('earningsPerShare').value);
+        var bookValuePerShare = parseFloat(document.getElementById('bookValuePerShare').value);
+        var expectedGrowthRate = parseFloat(document.getElementById('expectedGrowthRate').value);
+
+        var grahamValue = Math.sqrt(earningsPerShare * bookValuePerShare * (22.5 + 2 * expectedGrowthRate));
+	// Calculate Margin of Safety
+        var marketPrice = parseFloat(document.getElementById('marketPrice').value);
+        var marginOfSafety = ((grahamValue  - marketPrice) / grahamValue) * 100;
+	document.getElementById('grahamValueResult').innerText = "Graham Value: Rp " + grahamValue;        
+	document.getElementById('marginOfSafetyResult').innerText = "Margin of Safety: " + marginOfSafety.toFixed(2) + "%";
+    }
+
+
+</script>
+
+<!-- Graham Value Calculation -->
+<h2>Graham Value</h2>
+<label for="earningsPerShare">Earnings per Share: </label>
+<input type="number" id="earningsPerShare" step="0.01">
+<br>
+<label for="bookValuePerShare">Book Value per Share: </label>
+<input type="number" id="bookValuePerShare" step="0.01">
+<br>
+<label for="expectedGrowthRate">Expected Growth Rate: </label>
+<input type="number" id="expectedGrowthRate" step="0.001">
+<br>
+<label for="marketPrice">Market Price: </label>
+<input type="number" id="marketPrice" step="0.01">
+<br>
+<button onclick="calculateGrahamValue()">Calculate Graham Value</button>
+<p id="grahamValueResult"></p>
+<p id="marginOfSafetyResult"></p>
+
+</body>
+</html>
