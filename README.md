@@ -29,12 +29,17 @@ Selamat datang di **Aplikasi Analisis Saham**, sebuah proyek open-source berbasi
 
 ---
 
+---
+
 ## 🏗️ Teknologi yang Digunakan
 
 - **Backend**: [Yii2 Framework](https://www.yiiframework.com/)
 - **Database**: MySQL 8
 - **Frontend**: Admin LTE, Chart.js
 - **Tools**: HeidiSQL, Git, GitHub
+- Alasan pilihan:
+  - Yii2 karena cocok untuk aplikasi birokrasi (RBAC kuat, Active Record aman)
+  - AdminLTE karena cepat dan familiar untuk admin interface
 
 ---
 
@@ -57,3 +62,43 @@ Database `saham` terdiri dari tabel utama berikut:
 git clone https://github.com/username/saham-app.git
 cd saham-app
 composer install
+
+# 🧠 Catatan Pribadi Project Ini
+
+## 🗓️ Tanggal Mulai
+2025-06-13
+
+
+
+
+## 💡 Keputusan Kritis (Why-Logs)
+> Gunakan setiap kali kamu mengambil keputusan teknis penting
+
+- **2025-05-08**: Tidak pakai `??` operator karena server pakai PHP 7.0.
+- **2025-05-08**: Ganti field `user_id` jadi `account_id` agar konsisten dengan struktur RBAC yang dipakai DINSOS.
+- **2025-05-09**: Tidak pakai Bootstrap 5 karena konflik dengan Kartik GridView (masih Bootstrap 4).
+
+---
+
+## 🔄 Alur Singkat Aplikasi (Flow)
+1. User login via halaman `/site/login`
+2. Role dicek via RBAC (Yii2 authManager)
+3. User masuk ke dashboard berdasarkan `role_id`
+4. Proses izin input melalui form `/izin/create`
+5. Data divalidasi lalu dikirim via API ke endpoint eksternal DPMPTSP
+
+---
+
+## 🧪 Test Manual
+> Catat hasil uji coba biar nggak ulang dari awal
+
+- Login sebagai admin: ✅
+- Input form saham dengan file dokumen kosong: ❌ (error karena field wajib belum dicek)
+- Export Excel laporan bulanan: ✅
+
+---
+
+## 🛠️ TODO Pribadi
+- [ ] Tambah filter pencarian di halaman index
+- [ ] Buat modul notifikasi untuk user
+
